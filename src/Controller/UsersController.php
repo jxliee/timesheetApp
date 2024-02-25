@@ -11,6 +11,21 @@ namespace App\Controller;
  */
 class UsersController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('Flash'); // Include the FlashComponent
+        $this->loadComponent('Auth', [
+            'loginRedirect' => [
+                'controller' => 'Timesheets',
+                'action' => 'index',
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login',
+            ],
+        ]);
+    }
     /**
      * Index method
      *
@@ -18,14 +33,19 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Roles'],
+        ];
+
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
     }
 
-    public function display()
+    public function display($view = null)
     {
-        return $this->render('Uesrs');
+        $this->viewBuilder()->setTemplatePath('Users');
+        $this->set('view', $view);
     }
 
     /**
@@ -120,12 +140,24 @@ class UsersController extends AppController
             $password = $this->request->getData('password');
             $this->log("Attempting login with email: {$email}", 'debug');
     
-            $user = $this->Auth->identify();
+            // Manually query the database for a user with the provided email and password
+            $user = $this->Users->find('all', [
+                'conditions' => [
+                    'email' => $email,
+                    'password' => $password, // Assuming you're storing passwords in plain text
+                ],
+                'limit' =>  1, // Limit the results to  1 user
+            ])->first();
+    
             if ($user) {
+                // If a user is found, log them in and redirect to the Timesheets index page
                 $this->Auth->setUser($user);
                 return $this->redirect(['controller' => 'Timesheets', 'action' => 'index']);
+            } else {
+                // If no user is found, show an error message
+                $this->Flash->error(__('Invalid username or password, try again'));
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
+    
 }
