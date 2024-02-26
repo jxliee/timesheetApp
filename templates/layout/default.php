@@ -14,7 +14,6 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,33 +21,27 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake']) ?>
+    <?= $this->Html->css('milligram.min') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light top-nav">
+<nav class="navbar">
     <div class="container">
-        <a class="navbar-brand" href="<?= $this->Url->build('/') ?>"><span>Julie's</span> Timesheet App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= $this->Url->build('/') ?>">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'logout']) ?>">Logout</a>
-                </li>
-            </ul>
+        <a href="<?= $this->Url->build('/') ?>" class="navbar-brand">Julie's Timesheet App</a>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+            <a href="<?= $this->Url->build('/') ?>" class="navbar-item">Home</a>
+            <a href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'logout']) ?>" class="navbar-item">Logout</a>
+            </div>
+            <div class="navbar-end">
+            </div>
         </div>
     </div>
 </nav>

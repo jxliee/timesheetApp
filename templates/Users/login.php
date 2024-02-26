@@ -29,7 +29,7 @@
                         <?= $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'], 'class' => 'form-horizontal']) ?>
                         <div class="form-group">
                                 <div class="col-sm-10" style="margin-bottom: 20px;">
-                                    <?= $this->Form->control('email', ['type' => 'email', 'class' => 'form-control-plaintext', 'id' => 'email', 'placeholder' => __('Email')]) ?>
+                                    <?= $this->Form->control('email', ['type' => 'email', 'class' => 'form-control', 'id' => 'email', 'placeholder' => __('Email')]) ?>
                                 </div>
                                 <div class="col-sm-10">
                                     <?= $this->Form->control('password', ['type' => 'password', 'class' => 'form-control', 'id' => 'password', 'placeholder' => __('Password')]) ?>

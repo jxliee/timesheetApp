@@ -22,10 +22,9 @@
 </head>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <?= $this->Html->link(__('New Timesheet'), ['action' => 'add'], ['class' => 'btn btn-primary float-right']) ?>
                     <h3><?= __('Timesheets') ?></h3>
                 </div>
                 <div class="card-body">
@@ -75,6 +74,7 @@
                         </ul>
                         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
                     </div>
+                    <?= $this->Html->link(__('New Timesheet'), ['action' => 'add'], ['class' => 'btn btn-primary float-right']) ?>
                 </div>
             </div>
         </div>

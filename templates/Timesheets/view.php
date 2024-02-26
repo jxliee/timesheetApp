@@ -4,20 +4,36 @@
  * @var \App\Model\Entity\Timesheet $timesheet
  */
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <?= $this->Html->charset() ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <?= $this->fetch('title') ?>
+    </title>
+    <?= $this->Html->meta('icon') ?>
+
+    <?= $this->Html->css('bootstrap.min') ?> <!-- Include Bootstrap CSS -->
+
+    <?= $this->fetch('meta') ?>
+    <?= $this->fetch('css') ?>
+    <?= $this->fetch('script') ?>
+</head>
 <div class="row">
-    <aside class="column">
+    <aside class="col-md-3">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Timesheet'), ['action' => 'edit', $timesheet->timesheet_id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Timesheet'), ['action' => 'delete', $timesheet->timesheet_id], ['confirm' => __('Are you sure you want to delete # {0}?', $timesheet->timesheet_id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Timesheets'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Timesheet'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Edit Timesheet'), ['action' => 'edit', $timesheet->timesheet_id], ['class' => 'btn btn-primary']) ?>
+            <?= $this->Form->postLink(__('Delete Timesheet'), ['action' => 'delete', $timesheet->timesheet_id], ['confirm' => __('Are you sure you want to delete # {0}?', $timesheet->timesheet_id), 'class' => 'btn btn-danger']) ?>
+            <?= $this->Html->link(__('List Timesheets'), ['action' => 'index'], ['class' => 'btn btn-secondary']) ?>
+            <?= $this->Html->link(__('New Timesheet'), ['action' => 'add'], ['class' => 'btn btn-success']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="col-md-9">
         <div class="timesheets view content">
             <h3><?= h($timesheet->timesheet_id) ?></h3>
-            <table>
+            <table class="table">
                 <tr>
                     <th><?= __('User') ?></th>
                     <td><?= $timesheet->has('user') ? $this->Html->link($timesheet->user->username, ['controller' => 'Users', 'action' => 'view', $timesheet->user->user_id]) : '' ?></td>
@@ -54,3 +70,4 @@
         </div>
     </div>
 </div>
+
